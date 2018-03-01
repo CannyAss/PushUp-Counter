@@ -8,7 +8,6 @@ const int ledPin = 13;
 // defines variables
 long duration;
 int distance;
-int safetyDistance;
 
 int x, y, z, d, t;
 /* x is the number of push-ups
