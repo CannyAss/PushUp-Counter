@@ -56,7 +56,7 @@ void loop() {
     if (distance <= 6 || y == 0) {
       y++;
     }
-    if ( distance > z || y == 1) {
+    if ( distance >= z || y == 1) {
       x++;
       y--;
     }
