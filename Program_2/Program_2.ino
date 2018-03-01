@@ -61,6 +61,7 @@ void loop() {
       }
     } while ( distance < z || distance > 5); /* entering push-up status, d is smaller than initial position while further than 5cm) */
     digitalWrite(buzzer, HIGH);
+    delayMicroseconds(300);
 
   }
 
