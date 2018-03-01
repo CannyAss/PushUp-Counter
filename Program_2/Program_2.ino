@@ -9,7 +9,7 @@ const int ledPin = 13;
 long duration;
 int distance;
 
-int x, y, z, d, t;
+int x, y, z, t;
 /* x is the number of push-ups
     y is the 'down' state
     z is the 'up' position distance
@@ -50,17 +50,19 @@ void loop() {
     }
   } /* Setting 'Up' Status position */
 
+  if ( t == 300) {
+    do {
+      if (distance <= 6 || y == 0) {
+        y++;
+      }
+      if ( distance >= z || y == 1) {
+        x++;
+        y--;
+      }
+    } while ( distance < z || distance > 5); /* entering push-up status, d is smaller than initial position while further than 5cm) */
+    digitalWrite(buzzer, HIGH);
 
-  do {
-    if (distance <= 6 || y == 0) {
-      y++;
-    }
-    if ( distance >= z || y == 1) {
-      x++;
-      y--;
-    }
-  } while ( distance < z || distance > 5); /* entering push-up status, d is smaller than initial position while further than 5cm) */
-   digitalWrite(buzzer, HIGH);
+  }
 
   return 0;
 }
