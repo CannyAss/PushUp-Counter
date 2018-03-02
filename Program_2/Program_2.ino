@@ -47,6 +47,7 @@ void loop() {
   for ( t = 0; t < 300; t++ ) {
     if ( distance == distance + 3 || distance - 3 ) {
       distance = z;
+      else t = 0;
     }
   } /* Setting 'Up' Status position */
 
@@ -58,10 +59,10 @@ void loop() {
       if ( distance >= z || y == 1) {
         x++;
         y--;
+        digitalWrite(buzzer, HIGH);
       }
     } while ( distance < z || distance > 5); /* entering push-up status, d is smaller than initial position while further than 5cm) */
-    digitalWrite(buzzer, HIGH);
-    delayMicroseconds(300);
+
 
   }
 
