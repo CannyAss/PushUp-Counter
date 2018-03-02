@@ -29,39 +29,55 @@ void setup() {
 
 void loop() {
 
-  // Clears the trigPin
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(2);
+  for ( t = 0; t < 50; t++ ) {
+    digitalWrite(trigPin, LOW);
+    delayMicroseconds(2);
 
-  // Sets the trigPin on HIGH state for 10 micro seconds
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
+    digitalWrite(trigPin, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trigPin, LOW);
 
-  // Reads the echoPin, returns the sound wave travel time in microseconds
-  duration = pulseIn(echoPin, HIGH);
+    duration = pulseIn(echoPin, HIGH);
+    distance = duration * 0.034 / 2;
 
-  // Calculating the distance
-  distance = duration * 0.034 / 2;
+    if ( z == 0 ) distance = z; /* initial z value */
 
-  for ( t = 0; t < 300; t++ ) {
-    if ( distance == distance + 3 || distance - 3 ) {
+    if ( distance ==  distance < z + 3 || distance > z - 3 ) {
       distance = z;
-      else t = 0;
+    }
+    else t = 0; /* Resets the distance */
+
+    if ( t == 50 ) {
+      digitalWrite(buzzer, HIGH);
+      delayMicroseconds(10);
+      digitalWrite(buzzer, LOW); /* Beeps once to indicated 'ready' status*/
     }
   } /* Setting 'Up' Status position */
 
-  if ( t == 300) {
+  if ( t == 50) {
     do {
+
+      digitalWrite(trigPin, LOW);
+      delayMicroseconds(2);
+
+      digitalWrite(trigPin, HIGH);
+      delayMicroseconds(10);
+      digitalWrite(trigPin, LOW);
+
+      duration = pulseIn(echoPin, HIGH);
+      distance = duration * 0.034 / 2;
+
       if (distance <= 6 || y == 0) {
         y++;
       }
       if ( distance >= z || y == 1) {
         x++;
-        y--;
+        y = 0;
         digitalWrite(buzzer, HIGH);
+        delayMicroseconds(10);
+        digitalWrite(buzzer, LOW); /* beeps whenever 1 push up is done*/
       }
-    } while ( distance < z || distance > 5); /* entering push-up status, d is smaller than initial position while further than 5cm) */
+    } while ( distance < z + 40 ); /* Ends the moment you stand up */
 
 
   }
