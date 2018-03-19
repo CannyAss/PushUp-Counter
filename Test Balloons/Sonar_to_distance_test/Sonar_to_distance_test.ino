@@ -37,5 +37,6 @@ void loop() {
     distance = duration * 0.034 / 2;
     Serial.print(distance);
   }
+  return 0;
 
 }
