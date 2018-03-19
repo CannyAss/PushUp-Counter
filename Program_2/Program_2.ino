@@ -77,7 +77,7 @@ void loop() {
         delayMicroseconds(10);
         digitalWrite(buzzer, LOW); /* beeps whenever 1 push up is done*/
       }
-    } while ( distance < z + 40 ); /* Ends the moment you stand up */
+    } while ( distance > z + 40 ); /* Ends the moment you stand up */
 
 
   }
