@@ -33,7 +33,7 @@ void setup() {
 void loop() {
   // establish variables for duration of the ping, and the distance result
   // in inches and centimeters:
-  long duration, cm, y=0;
+  long duration, cm;
 
   pinMode(pingPin, OUTPUT);
   digitalWrite(pingPin, LOW);
@@ -56,11 +56,10 @@ void loop() {
   Serial.print("cm");
   Serial.println();
 
-  if ( cm < 6 ) {
-    tone(buzzer, 500); // Send 1KHz sound signal...
-    delay(500);        // ...for 1 sec
+  if ( cm < 50 ) {
+    tone(buzzer, 1000); // Send 1KHz sound signal...
+    delay(1000);        // ...for 1 sec
     noTone(buzzer);     // Stop sound...}
-
   }
 
   delay(100);
