@@ -1,47 +1,20 @@
-// this constant won't change. It's the pin number of the sensor's output:
-// defines pins numbers
-const int trigPin = 9;
-const int echoPin = 10;
-const int buzzer = 11;
-const int ledPin = 13;
 
-// defines variables
-long duration;
-int distance;
-
-int x, y, z, t;
+#include <LiquidCrystal.h>
+const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2, x=1;
+LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 void setup() {
-  // put your setup code here, to run once:
-
-  pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
-  pinMode(echoPin, INPUT); // Sets the echoPin as an Input
-  pinMode(buzzer, OUTPUT);
-  pinMode(ledPin, OUTPUT);
-  Serial.begin(9600); // Starts the serial communication
-
+  // set up the LCD's number of columns and rows:
+  lcd.begin(16, 2);
+  // Print a message to the LCD.
+  lcd.print("Welcome");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
-  for ( t = 0; t < 50; t++) {
-    digitalWrite(trigPin, LOW);
-    delayMicroseconds(2);
-
-    digitalWrite(trigPin, HIGH);
-    delayMicroseconds(10);
-    digitalWrite(trigPin, LOW);
-
-    duration = pulseIn(echoPin, HIGH);
-    distance = duration * 0.034 / 2;
-    if ( distance < 6 ) {
-      tone(buzzer, 1000); // Send 1KHz sound signal...
-      delay(1000);        // ...for 1 sec
-      noTone(buzzer);     // Stop sound...}
-      Serial.print(distance);
-    }
-    return 0;
-
-  }
+  // set the cursor to column 0, line 1
+  // (note: line 1 is the second row, since counting begins with 0):
+  lcd.setCursor(0, 1);
+  // print the number of pushups since reset:
+  lcd.print("Pushups done:");
+  lcd.print(x);
 }
