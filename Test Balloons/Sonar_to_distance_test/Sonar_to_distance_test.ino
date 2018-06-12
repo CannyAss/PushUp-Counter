@@ -1,9 +1,7 @@
 // this constant won't change. It's the pin number of the sensor's output:
 // defines pins numbers
-const int trigPin = 9;
-const int echoPin = 10;
-const int buzzer = 11;
-const int ledPin = 13;
+const int trigPin = 7;
+const int echoPin = 7;
 
 // defines variables
 long duration;
@@ -15,9 +13,7 @@ void setup() {
   // put your setup code here, to run once:
 
   pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
-  pinMode(echoPin, INPUT); // Sets the echoPin as an Input
-  pinMode(buzzer, OUTPUT);
-  pinMode(ledPin, OUTPUT);
+  pinMode(echoPin, INPUT); // Sets the echoPin as an Inpu
   Serial.begin(9600); // Starts the serial communication
 
 }
