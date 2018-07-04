@@ -1,38 +1,52 @@
-// this constant won't change. It's the pin number of the sensor's output:
-// defines pins numbers
-const int trigPin = 7;
-const int echoPin = 7;
-
-// defines variables
-long duration;
-int distance;
-
-int x, y, z, t;
-
+const int trigPin = 7; //Change to pin you use
+const int echoPin = 6; //Here too
+const int buzzer = 8;
 void setup() {
-  // put your setup code here, to run once:
-
-  pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
-  pinMode(echoPin, INPUT); // Sets the echoPin as an Inpu
-  Serial.begin(9600); // Starts the serial communication
-
+ // initialize serial communication:
+ Serial.begin(9600);
+ 
+ pinMode(trigPin, OUTPUT);
+ pinMode(echoPin, INPUT);
+ digitalWrite(trigPin, LOW);
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
+void loop()
+{
+ // establish variables for duration of the ping, 
+ // and the distance result in inches and centimeters:
+ long duration, inches, cm;
+ 
+ 
+ digitalWrite(trigPin, HIGH);
+ delayMicroseconds(10);
+ digitalWrite(trigPin, LOW);
 
-  for ( t = 0; t < 50; t++) {
-    digitalWrite(trigPin, LOW);
-    delayMicroseconds(2);
+ duration = pulseIn(echoPin, HIGH);
 
-    digitalWrite(trigPin, HIGH);
-    delayMicroseconds(10);
-    digitalWrite(trigPin, LOW);
-
-    duration = pulseIn(echoPin, HIGH);
-    distance = duration * 0.034 / 2;
-    Serial.print(distance);
-  }
-  return 0;
-
+ // convert the time into a distance
+ cm = microsecondsToCentimeters(duration);
+ 
+ Serial.print(cm);
+ Serial.print("cm");
+ Serial.println();
+ 
+ delay(100);
+ if ( cm < 6){
+    tone(buzzer, 500); // Send 1KHz sound signal...
+    delay(100);        // ...for 1 sec
+    noTone(buzzer);     // Stop sound...}
 }
+}
+
+
+long microsecondsToCentimeters(long microseconds)
+{
+ // The speed of sound is 340 m/s or 29 microseconds per centimeter.
+ // The ping travels out and back, so to find the distance of the
+ // object we take half of the distance travelled.
+ return microseconds / 29 / 2;
+ 
+}
+
+
+
