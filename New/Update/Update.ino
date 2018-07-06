@@ -1,13 +1,17 @@
 int y = 0, pushup = 0, initial = 0;
 
 // this constant won't change. It's the pin number of the sensor's output:
-const int pingPin = 7;
-const int buzzer = 11;
-const int flex = 5;
+const int trigPin = 7; //Change to pin you use
+const int echoPin = 6; //Here too
+const int buzzer = 8;
 
 void setup() {
   // initialize serial communication:
   Serial.begin(9600);
+  
+ pinMode(trigPin, OUTPUT);
+ pinMode(echoPin, INPUT);
+ digitalWrite(trigPin, LOW);
 }
 
 void loop() {
@@ -15,16 +19,11 @@ void loop() {
   // in centimeters:
   long duration, cm;
 
-  pinMode(pingPin, OUTPUT);
-  digitalWrite(pingPin, LOW);
-  delayMicroseconds(2);
-  digitalWrite(pingPin, HIGH);
-  delayMicroseconds(5);
-  digitalWrite(pingPin, LOW);
+ digitalWrite(trigPin, HIGH);
+ delayMicroseconds(10);
+ digitalWrite(trigPin, LOW);
 
-  pinMode(pingPin, INPUT);
-  pinMode(buzzer, OUTPUT);
-  duration = pulseIn(pingPin, HIGH);
+  duration = pulseIn(echoPin, HIGH);
 
   // convert the time into a distance
   cm = microsecondsToCentimeters(duration); /* Finding the distance */
@@ -34,7 +33,7 @@ void loop() {
   Serial.println();
 
   if (initial == 0) initial = cm;
-  if ( cm < 6 && y == 0 && flex > 85 ) {
+  if ( cm < 6 && y == 0 ) {
     y++;
   }
 
