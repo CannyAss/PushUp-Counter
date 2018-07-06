@@ -39,12 +39,11 @@ void loop() {
 
   if ( cm > initial - 2 && y == 1) {
     tone(buzzer, 500); // Send 500Hz sound signal...
-    delay(250);        // ...for 0.25 sec
+    delay(100);        // ...for 0.1 sec
     noTone(buzzer);     // Stop sound...}
     y--;
     pushup++;
   }
-  delay(100);
 }
 
 
