@@ -1,10 +1,13 @@
-int y = 0, pushup = 0, initial = 0;
+#include <LiquidCrystal.h> 
+int y = 0, pushup = 0, initial = 0, Contrast = 50;
 
 // this constant won't change. It's the pin number of the sensor's output:
 const int trigPin = 7; //Change to pin you use
 const int echoPin = 6; //Here too
 const int buzzer = 8;
 
+ LiquidCrystal lcd(12, 11, 5, 4, 3, 2);   
+ 
 void setup() {
   // initialize serial communication:
   Serial.begin(9600);
@@ -12,6 +15,8 @@ void setup() {
  pinMode(trigPin, OUTPUT);
  pinMode(echoPin, INPUT);
  digitalWrite(trigPin, LOW);
+    analogWrite(9,Contrast);
+    lcd.begin(16, 2);
 }
 
 void loop() {
@@ -44,6 +49,9 @@ void loop() {
     y--;
     pushup++;
   }
+     lcd.setCursor(0, 0);
+     lcd.print("Pushups Done: ");
+     lcd.print(pushup);
 }
 
 
