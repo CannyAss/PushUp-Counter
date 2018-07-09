@@ -42,7 +42,7 @@ void loop() {
     y++;
   }
 
-  if ( cm > initial - 2 && y == 1) {
+  if ( cm > initial && y == 1) {
     tone(buzzer, 500); // Send 500Hz sound signal...
     delay(100);        // ...for 0.1 sec
     noTone(buzzer);     // Stop sound...}
