@@ -1,5 +1,5 @@
 #include <LiquidCrystal.h> 
-int y = 0, pushup = 0, initial = 0, Contrast = 50;
+int y = 0, pushup = 0, initial = 0, Contrast = 2000;
 
 // this constant won't change. It's the pin number of the sensor's output:
 const int trigPin = 7; //Change to pin you use
@@ -38,12 +38,12 @@ void loop() {
   Serial.println();
 
   if (initial == 0) initial = cm;
-  if ( cm < 6 && y == 0 ) {
+  if ( cm < 7 && y == 0 ) {
     y++;
   }
 
   if ( cm > initial && y == 1) {
-    tone(buzzer, 500); // Send 500Hz sound signal...
+    tone(buzzer, 1500); // Send 500Hz sound signal...
     delay(100);        // ...for 0.1 sec
     noTone(buzzer);     // Stop sound...}
     y--;
