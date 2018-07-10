@@ -1,5 +1,5 @@
 #include <LiquidCrystal.h> 
-int y = 0, pushup = 0, initial = 0, Contrast = 2000;
+int y = 0, pushup = 0, initial = 0, Contrast = 2000, x=0, i=0;
 
 // this constant won't change. It's the pin number of the sensor's output:
 const int trigPin = 7; //Change to pin you use
@@ -17,6 +17,9 @@ void setup() {
  digitalWrite(trigPin, LOW);
     analogWrite(9,Contrast);
     lcd.begin(16, 2);
+      delay(5000); 
+
+    
 }
 
 void loop() {
@@ -37,13 +40,31 @@ void loop() {
   Serial.print("cm");
   Serial.println();
 
-  if (initial == 0) initial = cm;
+if (cm<100 && initial==0){
+  for (int i = 0; i<30; i++){
+    x=x+cm; /* Total initial distance recorded */
+    if (i==29){
+      initial = x/29; /*Average initial distance*/
+    tone(buzzer, 500); // Send 500Hz sound signal...
+    delay(200);        // ...for 0.2 sec
+    noTone(buzzer);     // Stop sound...}
+    tone(buzzer, 500); // Send 500Hz sound signal...
+    delay(200);        // ...for 0.2 sec
+    noTone(buzzer);     // Stop sound...}
+    
+    }
+  }
+}
+
+
+
+  if (initial > 0){
   if ( cm < 7 && y == 0 ) {
     y++;
   }
 
   if ( cm > initial && y == 1) {
-    tone(buzzer, 1500); // Send 500Hz sound signal...
+    tone(buzzer, 1500); // Send 1500Hz sound signal...
     delay(100);        // ...for 0.1 sec
     noTone(buzzer);     // Stop sound...}
     y--;
@@ -52,7 +73,10 @@ void loop() {
      lcd.setCursor(0, 0);
      lcd.print("Pushups Done: ");
      lcd.print(pushup);
+  
 }
+}
+
 
 
 long microsecondsToCentimeters(long microseconds) {
