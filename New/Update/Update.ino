@@ -1,5 +1,5 @@
 #include <LiquidCrystal.h> 
-int y = 0, pushup = 0, initial = 0, Contrast = 2000, x=0, i=0;
+int y = 0, pushup = 0, initial = 0, Contrast = 2000, x=0, i=0, sensor, degrees;
 
 // this constant won't change. It's the pin number of the sensor's output:
 const int trigPin = 7; //Change to pin you use
@@ -59,11 +59,13 @@ if (cm<100 && initial==0){
 
 
   if (initial > 0){
-  if ( cm < 7 && y == 0 ) {
+      sensor = analogRead(5);
+        degrees = map(sensor, 768, 853, 0, 90);
+  if ( cm < 7 && y == 0 && degrees <-130 && degrees > -270) {
     y++;
   }
 
-  if ( cm > initial && y == 1) {
+  if ( cm >= initial && y == 1) {
     tone(buzzer, 1500); // Send 1500Hz sound signal...
     delay(100);        // ...for 0.1 sec
     noTone(buzzer);     // Stop sound...}
