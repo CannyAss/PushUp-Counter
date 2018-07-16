@@ -20,6 +20,7 @@ void setup() {
     analogWrite(9,Contrast);
     lcd.begin(16, 2);
       delay(5000); 
+  pinMode(13, OUTPUT);
 
     
 }
@@ -43,10 +44,11 @@ void loop() {
   Serial.println();
 
 if (cm<100 && initial==0){
-  for (int i = 0; i<30; i++){
+    digitalWrite(13, LOW); //Not Ready (LED is off)
+  for (int i = 0; i<100; i++){
     x=x+cm; /* Total initial distance recorded */
-    if (i==29){
-      initial = x/29; /*Average initial distance*/
+    if (i==99){
+      initial = x/99; /*Average initial distance*/
     tone(buzzer, 500); // Send 500Hz sound signal...
     delay(200);        // ...for 0.2 sec
     noTone(buzzer);     // Stop sound...}
@@ -56,6 +58,7 @@ if (cm<100 && initial==0){
     
     }
   }
+    digitalWrite(13, HIGH); //Ready (LED is green)
 }
 
 
@@ -68,6 +71,7 @@ if (cm<100 && initial==0){
   }
 
   if ( cm >= initial && y == 1) {
+    digitalWrite(13, LOW); //Push up started(LED is off)
     tone(buzzer, 1500); // Send 1500Hz sound signal...
     delay(100);        // ...for 0.1 sec
     noTone(buzzer);     // Stop sound...}
