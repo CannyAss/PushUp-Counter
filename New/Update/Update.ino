@@ -1,3 +1,5 @@
+
+
 #include <LiquidCrystal.h> 
 int y = 0, pushup = 0, initial = 0, Contrast = 2000, x=0, i=0, sensor, degrees;
 
