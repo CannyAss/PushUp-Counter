@@ -66,7 +66,7 @@ if (cm<100 && initial==0){
   if (initial > 0){
       sensor = analogRead(5);
         degrees = map(sensor, 768, 853, 0, 90);
-  if ( cm < 7 && y == 0 && degrees <-130 && degrees > -270) {
+  if ( cm < 7 && y == 0 && degrees <-170 && degrees > -280) {
     y++;
   }
 
