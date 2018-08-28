@@ -1,7 +1,5 @@
-
-
 #include <LiquidCrystal.h>  
-int Contrast=90, x=5;
+int Contrast=20;
  LiquidCrystal lcd(12, 11, 5, 4, 3, 2);   
 
  void setup()
@@ -12,6 +10,8 @@ int Contrast=90, x=5;
      void loop()
  {  
      lcd.setCursor(0, 0);
-     lcd.print("Pushups Done" );
-     lcd.print(x);
+     lcd.print("Hello Friends");
+    
+    lcd.setCursor(0, 1);
+     lcd.print("KesPra");
  }
