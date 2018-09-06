@@ -1,6 +1,13 @@
+
+#include <TM1637Display.h>
 const int trigPin = 7; //Change to pin you use
 const int echoPin = 6; //Here too
 const int buzzer = 8;
+const int CLK = 3; //Set the CLK pin connection to the display
+const int DIO = 2; //Set the DIO pin connection to the display
+TM1637Display display(CLK, DIO);  //set up the 4-Digit Display.
+
+
 void setup() {
  // initialize serial communication:
  Serial.begin(9600);
@@ -8,6 +15,8 @@ void setup() {
  pinMode(trigPin, OUTPUT);
  pinMode(echoPin, INPUT);
  digitalWrite(trigPin, LOW);
+ 
+  display.setBrightness(0x0a);  //set the diplay to maximum brightness
 }
 
 void loop()
@@ -29,6 +38,7 @@ void loop()
  Serial.print(cm);
  Serial.print("cm");
  Serial.println();
+ display.showNumberDec(cm); //Display the Variable value;
  
  delay(100);
  if ( cm < 6){

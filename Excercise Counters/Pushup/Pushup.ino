@@ -1,7 +1,7 @@
 
 #include <TM1637Display.h>
 #include <LiquidCrystal.h> 
-int y = 0, pushup = 0, initial = 0, Contrast = 2000, x=0, i=0, l=0, sensor, degrees;
+int y = 0, pushup = 0, initial = 0, Contrast = 2000, x=0, i=0, l=0, j, sensor, degrees;
 
 // this constant won't change. It's the pin number of the sensor's output:
 const int trigPin = 7; //Change to pin you use
@@ -20,7 +20,7 @@ void setup() {
  pinMode(echoPin, INPUT);
  digitalWrite(trigPin, LOW);
     analogWrite(9,Contrast);
-      delay(5000); 
+      delay(3000); 
   pinMode(13, OUTPUT);
   display.setBrightness(0x0a);  //set the diplay to maximum brightness
     
@@ -67,17 +67,24 @@ if (cm<100 && initial==0){
   if (initial > 0){
       sensor = analogRead(5);
         degrees = map(sensor, 768, 853, 0, 90);
-  if ( cm < 7 && y == 0 && degrees <-350 && degrees > -1000) {
+  if ( cm < 7 && y == 0 && degrees <-400 && degrees > -500) {
     y++;
   }
-
-  if ( cm >= initial - 6 && y == 1 && cm<100) {
+  if ( cm >= initial && y == 1 && cm<100) {
+    for (int j = 0; j < 6; j++){
+    if (j = 5){
     digitalWrite(13, LOW); //Push up started(LED is off)
     tone(buzzer, 1500); // Send 1500Hz sound signal...
     delay(100);        // ...for 0.1 sec
     noTone(buzzer);     // Stop sound...}
     y--;
     pushup++;
+     }
+     
+    } //loop to reduce anomaly data when pushing up
+    if ( y == 0) {
+      j = 0;   // reset j so that it can be used again
+    }
   }
       display.showNumberDec(pushup); //Display the Variable value;
 }
@@ -88,6 +95,7 @@ if (cm>100){
   for (;;);
   }
 } /*End Function*/
+
 
 }
 
