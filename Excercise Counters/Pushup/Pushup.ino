@@ -67,10 +67,10 @@ if (cm<100 && initial==0){
   if (initial > 0){
       sensor = analogRead(5);
         degrees = map(sensor, 768, 853, 0, 90);
-  if ( cm < 7 && y == 0 && degrees <-400 && degrees > -500) {
+  if ( cm < 7 && y == 0 && degrees <-300 && degrees > -600) {
     y++;
   }
-  if ( cm >= initial && y == 1 && cm<100) {
+  if ( cm >= initial-2 && y == 1 && cm<100) {
     for (int j = 0; j < 6; j++){
     if (j = 5){
     digitalWrite(13, LOW); //Push up started(LED is off)
