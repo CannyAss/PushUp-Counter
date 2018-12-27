@@ -6,7 +6,7 @@ const int buzzer = 8;
 const int CLK = 3; //Set the CLK pin connection to the display
 const int DIO = 2; //Set the DIO pin connection to the display
 TM1637Display display(CLK, DIO);  //set up the 4-Digit Display.
-
+int x = 0, y = 0, i=0;
 
 void setup() {
  // initialize serial communication:
@@ -34,13 +34,23 @@ void loop()
 
  // convert the time into a distance
  cm = microsecondsToCentimeters(duration);
- 
+
+if ( cm<550 && cm>250){
+ for (i = 0; i<=50; i++){
+  x = x+cm;
+  if (i==50){
+    y++;
+    cm = x/50;
+  }
+ }
+}
+ if (y == 1){
  Serial.print(cm);
  Serial.print("cm");
  Serial.println();
  display.showNumberDec(cm); //Display the Variable value;
- 
- delay(100);
+ for (;;);
+ }
 
 }
 
