@@ -67,10 +67,11 @@ if (cm<100 && initial==0){
   if (initial > 0){
       sensor = analogRead(5);
         degrees = map(sensor, 768, 853, 0, 90);
-  if ( cm < 7 && y == 0 && degrees <-300 && degrees > -600) {
+  if ( cm < 7 && y == 0 && degrees < -400 && degrees > -600) {
     y++;
-  }
-  if ( cm >= initial-2 && y == 1 && cm<100) {
+  } // Testing if user is in prone position
+  
+  if ( cm >= initial-2 && y == 1 && cm<100 && degrees < -400 && degrees > -600) {
     for (int j = 0; j < 6; j++){
     if (j = 5){
     digitalWrite(13, LOW); //Push up started(LED is off)
@@ -79,7 +80,7 @@ if (cm<100 && initial==0){
     noTone(buzzer);     // Stop sound...}
     y--;
     pushup++;
-     }
+     } // Testing is user has returned to original position
      
     } //loop to reduce anomaly data when pushing up
     if ( y == 0) {
